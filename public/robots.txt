@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://youtubemp3.io
+
+# Sitemaps
+Sitemap: https://youtubemp3.io/sitemap.xml

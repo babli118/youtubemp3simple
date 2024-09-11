@@ -1,4 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+import withPWA from "next-pwa";
 
-export default nextConfig;
+const prod = process.env.NODE_ENV === "production";
+
+const pwaConfig = withPWA({
+  dest: "public",
+  disable: !prod,
+});
+
+const nextConfig = {
+  images: {
+    domains: ["i.ytimg.com", "yt3.ggpht.com", "img.youtube.com"],
+  },
+};
+
+export default pwaConfig(nextConfig);
