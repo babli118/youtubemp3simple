@@ -12,6 +12,13 @@ const nextConfig = {
   images: {
     domains: ["i.ytimg.com", "yt3.ggpht.com", "img.youtube.com"],
   },
+
+  reactStrictMode: true,
+  async rewrites() {
+    return {
+      afterFiles: [{ source: "/:path*", destination: "/_404/:path*" }],
+    };
+  },
 };
 
 export default pwaConfig(nextConfig);

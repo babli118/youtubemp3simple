@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
 export default async function RootLayout({ children, params }) {
   return (
     <html>
-      <GoogleTagManager gtmId="GTM-NRP8VP5J" />
+      {/* <GoogleTagManager gtmId="GTM-NRP8VP5J" /> */}
       <body
         className={
           poppins.className +

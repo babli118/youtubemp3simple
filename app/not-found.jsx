@@ -1,21 +1,17 @@
 "use client";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const NotFound = () => {
+export default function Page() {
+  const router = useRouter();
+
   useEffect(() => {
-    // Redirect to the home page after a slight delay to ensure rendering
-    const timer = setTimeout(() => {
-      window.location.href = "/";
-    }, 10); // 100 ms delay
-
-    return () => clearTimeout(timer); // Clean up timer if the component unmounts
-  }, []);
+    router.push("/");
+  });
 
   return (
-    <div className="my-36 text-text text-8xl text-center my-  font-bold">
-      404
+    <div className="my-26 text-6xl text-center text-text font-bold">
+      Youtube To MP3
     </div>
-  ); // No need to render anything
-};
-
-export default NotFound;
+  );
+}
