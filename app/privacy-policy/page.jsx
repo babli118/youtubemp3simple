@@ -5,9 +5,13 @@ import TaskBar from "../../components/taskBar";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy - YOUTUBEMP3 Youtube TO MP3 CONVERTER",
+  title: "Privacy Policy - YOUTUBEMP3 Youtube TO MP3 CONVERTER and Downloader",
   description:
     "Convert and download your favourite YouTube videos to mp3 with YouTubeMP3. Enjoy high-quality and fast YouTube music downloads.",
+  metadataBase: new URL("https://youtubemp3.io/"),
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 const Page = () => {

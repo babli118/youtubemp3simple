@@ -267,7 +267,7 @@ const SearchBox = ({ mp3, dl, pholder }) => {
       )}
       <div id={"song"} ref={songRef}>
         {videoInfo ? (
-          <div className="flex flex-col justify-center content-center w-[100vw]  mt-10 sm:mt-6">
+          <div className="flex flex-col justify-center content-center w-[100vw]  mt-10 sm:mt-0  min-[1281px]:mt-6">
             <div className={"content-center mx-auto justify-between flex"}>
               <div className="mt-10 sm:hidden  "></div>
 

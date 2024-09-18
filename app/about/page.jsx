@@ -1,12 +1,10 @@
 import React from "react";
 
 import ReturnBtn from "../../containers/returnBtn.jsx";
-import Footer from "../../components/Footer";
-import TaskBar from "../../components/taskBar";
 
 export const metadata = {
   title: " About - YOUTUBEMP3 Youtube Converter and Downloader",
-  metadataBase: new URL("https://spotifyloader.com"),
+  metadataBase: new URL("https://youtubemp3.io/"),
   alternates: {
     canonical: "/about",
   },

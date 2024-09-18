@@ -22,7 +22,7 @@ const Footer = () => {
 
           <p className="text-primary1 mt-2">
             © {new Date().getFullYear()} - youtubemp3.io
-            <span className="text-sm font-normal text-textLight"> (v1)</span>
+            <span className="text-sm font-normal text-textLight"> (v1.1)</span>
           </p>
         </div>
       </div>

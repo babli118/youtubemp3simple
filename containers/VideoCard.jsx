@@ -67,7 +67,7 @@ const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
               <DisplayDuration durationInSeconds={video.duration} />
             </div>
           </div>
-          <div className="flex  mb-4 ">
+          <div className="flex  mb-2 min-[1281px]:mb-4">
             <div>
               <div className="my-2">
                 <p

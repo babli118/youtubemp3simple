@@ -1,12 +1,14 @@
 import React from "react";
 import ReturnBtn from "../../containers/returnBtn";
-import Footer from "../../components/Footer";
-import TaskBar from "../../components/taskBar";
 
 export const metadata = {
-  title: "Copyright Information - YTMP3X Youtube Converter and Downloader",
+  title: "Copyright Information - YOUTUBEMP3 Youtube Converter and Downloader",
   description:
     "Convert and download your favourite YouTube videos to mp3 with YouTubeMP3. Enjoy high-quality and fast YouTube music downloads.",
+  metadataBase: new URL("https://youtubemp3.io/"),
+  alternates: {
+    canonical: "/copyright",
+  },
 };
 const Page = () => {
   return (

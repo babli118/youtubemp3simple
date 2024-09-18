@@ -1,13 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import ReturnBtn from "../../containers/returnBtn";
-import Footer from "../../components/Footer";
-import TaskBar from "../../components/taskBar";
 
 export const metadata = {
   title: "Terms of service - YOUTUBEMP3 Youtube Converter and Downloader",
   description:
     "Convert and download your favourite YouTube videos to mp3 with YouTubeMP3. Enjoy high-quality and fast YouTube music downloads.",
+  metadataBase: new URL("https://youtubemp3.io/"),
+  alternates: {
+    canonical: "/tos",
+  },
 };
 
 const Tos = () => {
