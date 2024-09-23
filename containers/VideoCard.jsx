@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation.js";
 import Image from "next/image";
 import getVideoDlLink from "../utils/getVideoDlLink.js";
 import getAudioDlLink from "../utils/getAudioDlLink.js";
+import "react-toastify/dist/ReactToastify.css";
+import { Bounce, Slide, ToastContainer, toast } from "react-toastify";
 import DisplayDuration from "../utils/DurationDisplay.js";
 import { TailSpin } from "react-loader-spinner";
+import { genToken } from "../app/token.js";
+import { startDownload, getKey } from "../utils.jsx";
+
 const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
   const { video } = videoInfo;
+  const videoId = video.id;
   const [loadingMp3, setLoadingMp3] = useState(false);
+  const [data, setData] = useState(false);
   const [loadingMp4, setLoadingMp4] = useState(false);
   const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false);
   const [open, setOpen] = useState(false);
@@ -20,6 +28,54 @@ const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
       return title;
     }
   }
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    const getToken = async () => {
+      const result = await genToken();
+      setToken(getKey(result));
+    };
+
+    getToken();
+  }, []);
+  // console.log(token);
+  const getDownloadLink = async (videoId, format) => {
+    try {
+      const res = await fetch(`https://api.mp3youtube.cc/v2/converter`, {
+        cache: "no-cache",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          accept: "*/*",
+          key: token,
+        },
+        body: `link=https://www.youtube.com/watch?v=${videoId}&format=${format}&audioBitrate=320&videoQuality=1080&vCodec=h264`,
+      });
+
+      if (!res.ok) {
+        throw new Error("Something went wrong");
+        showToast("Something went wrong");
+      }
+
+      const data = await res.json();
+      setData(data);
+      startDownload(data.url);
+    } catch (e) {
+      showToast("Something went wrong");
+      console.log(e);
+    }
+  };
+  const showToast = (msg) => {
+    toast.error(msg, {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   return (
     <div className="flex flex-col justify-center  items-center   ">
@@ -120,9 +176,8 @@ const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
           }}
           onClick={async () => {
             setLoadingMp3(true);
-            await getAudioDlLink(url);
+            await getDownloadLink(videoId, "mp3");
             setLoadingMp3(false);
-            sendGAEvent("event", "Download ");
           }}
           className="bg-primary1 flex mt-2 w-[300px]  justify-center items-center gap-2 text-white text-center relative hover:scale-105 px-4  py-3 transition-all text-base font-semibold   rounded-md"
         >
@@ -143,9 +198,8 @@ const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
           }}
           onClick={async () => {
             setLoadingMp4(true);
-            await getVideoDlLink(url);
+            await getDownloadLink(videoId, "mp4");
             setLoadingMp4(false);
-            sendGAEvent("event", "Download ");
           }}
           className=" flex mt-2 justify-center items-center gap-2 text-white text-center relative hover:scale-105 px-4  py-3 transition-all text-base font-semibold    rounded-md"
         >

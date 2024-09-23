@@ -1,4 +1,3 @@
-
 import { Poppins } from "next/font/google";
 
 export const poppins = Poppins({
@@ -19,10 +18,13 @@ export const startDownload = (downloadLink) => {
   document.body.removeChild(link);
 };
 
-
 export const isLink = (input) => {
   // Regular expression to match URLs
   var urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
   // Check if input matches the URL regex
   return urlRegex.test(input);
+};
+
+export const getKey = (str) => {
+  return btoa(str.split("").reverse().join(""));
 };
