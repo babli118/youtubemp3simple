@@ -36,7 +36,7 @@ const SearchBox = ({ mp3, dl, pholder }) => {
   const songRef = useRef(null);
 
   useEffect(() => {
-    console.log("inputValue:", inputValue);
+    console.log("-");
   }, [inputValue]);
 
   const isYouTubeUrl = (url) =>

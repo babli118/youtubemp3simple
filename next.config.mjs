@@ -5,7 +5,6 @@ const prod = process.env.NODE_ENV === "production";
 
 const pwaConfig = withPWA({
   dest: "public",
-  disable: !prod,
 });
 
 const nextConfig = {

@@ -24,12 +24,14 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: "YouTube To MP3 Converter and Downloader: YOUTUBEMP3",
     },
+    manifest: "/manifest.json",
   };
 }
+
 export default async function RootLayout({ children, params }) {
   return (
     <html>
-      {/* <GoogleTagManager gtmId="GTM-NRP8VP5J" /> */}
+      <GoogleTagManager gtmId="GTM-NRP8VP5J" />
       <body
         className={
           poppins.className +
