@@ -78,7 +78,7 @@ const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center  items-center   ">
+    <div className="flex flex-col justify-center items-center   ">
       <div
         style={{
           width: "360px",

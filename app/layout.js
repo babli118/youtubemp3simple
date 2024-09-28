@@ -15,14 +15,14 @@ const poppins = Poppins({
 export async function generateMetadata({ params }) {
   return {
     metadataBase: new URL(`https://youtubemp3.io/`),
-    title: "YouTube To MP3 Converter and Downloader: YOUTUBEMP3",
+    title: "YouTube to MP3 Converter: YOUTUBEMP3",
     description:
-      "YOUTUBEMP3 is a Youtube to MP3 converter and downloader that allows you to easily convert and download Youtube videos in MP3 and MP4 online for free.",
+      "YOUTUBEMP3 is a Youtube to MP3 converter that allows you to easily convert and download Youtube videos in MP3 and MP4 online for free.",
     alternates: {
       canonical: "https://youtubemp3.io/",
     },
     openGraph: {
-      title: "YouTube To MP3 Converter and Downloader: YOUTUBEMP3",
+      title: "YouTube To MP3 Converter: YOUTUBEMP3",
     },
     manifest: "/manifest.json",
   };

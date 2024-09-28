@@ -8,11 +8,11 @@ const BestDownloader = ({ bestHeading, p1, p2, p3, p4 }) => {
       </h2>
       <div className="text-sm leading-7 sm:leading-7 sm:text-base text-text ">
         <p>
-          YOUTUBEMP3 is the best YouTube video converter and downloader.
-          It&apos;s the fastest tool for converting YouTube videos to MP3 and
-          MP4. YOUTUBEMP3 Video Downloader is the best Youtube video downloader,
-          which allows downloading HD 1080p videos, MP3, converting Youtube to
-          MP3 and MP4 in high quality.
+          YOUTUBEMP3 is the best YouTube to MP3 converter. It&apos;s the fastest
+          tool for converting YouTube videos to MP3 and MP4. YOUTUBEMP3 Video
+          Downloader is the best Youtube video downloader, which allows
+          downloading HD 1080p videos, MP3, converting Youtube to MP3 and MP4 in
+          high quality.
         </p>
         <p>
           YOUTUBEMP3 supports searching and downloading any video from Youtube

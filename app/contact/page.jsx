@@ -24,7 +24,7 @@ const Page = () => {
               Want to get in touch with us for any query, Please connect with us
               by using this link:
             </p>
-            <a className="text-accent1" href="https://m.me/yt2meta">
+            <a className="text-accent1" href="https://m.me/61565890374780">
               m.me/YOUTUBEMP3
             </a>
           </div>
