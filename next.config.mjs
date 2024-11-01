@@ -13,6 +13,7 @@ const nextConfig = {
   },
 
   reactStrictMode: true,
+
   async rewrites() {
     return {
       afterFiles: [{ source: "/:path*", destination: "/_404/:path*" }],
