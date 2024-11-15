@@ -14,7 +14,7 @@ const getVideoInfo = async (inputValue) => {
     const videoFetch = await fetch(url, options);
     const videoInfo = await videoFetch.json();
 
-    if (videoInfo.video.watchingCount > 0) {
+    if (videoInfo.watchingCount > 0) {
       toast.error("Live videos can't be downloaded", {
         position: "bottom-center",
         autoClose: 3000,
@@ -28,7 +28,7 @@ const getVideoInfo = async (inputValue) => {
       });
       return;
     }
-    if (videoInfo.video.duration > 10800) {
+    if (videoInfo.duration > 10800) {
       toast.error("Youtube Videos Above 3 Hours Length Cant Be Downloaded", {
         position: "bottom-center",
         autoClose: 3000,

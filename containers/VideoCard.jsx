@@ -12,7 +12,8 @@ import { genToken } from "../app/token.js";
 import { startDownload, getKey } from "../utils.jsx";
 
 const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
-  const { video } = videoInfo;
+  const video = videoInfo;
+
   const videoId = video.id;
   const [loadingMp3, setLoadingMp3] = useState(false);
   const [data, setData] = useState(false);
@@ -142,7 +143,7 @@ const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
                     alt="channel logo"
                     width={25}
                     height={20}
-                    src={video.channelThumbnails}
+                    src={video.channelThumbnails[2].url}
                   />
                   <p
                     style={{ color: "rgb(22 19 19 / 0.7)" }}
