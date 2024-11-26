@@ -4,9 +4,7 @@ import Info from ".././components/Info.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 export default async function Page() {
-
   return (
     <main className=" relative">
       <ToastContainer
@@ -24,11 +22,9 @@ export default async function Page() {
 
       <div className=" text-sm h-auto transition-all overflow-x-hidden scroll-smooth relative">
         {" "}
-        <Hero  />
-        <SearchBox mp3={true}  />
-        <Info
-       
-        />
+        <Hero />
+        <SearchBox mp3={true} />
+        <Info />
       </div>
     </main>
   );

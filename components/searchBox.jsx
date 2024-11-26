@@ -56,7 +56,6 @@ const SearchBox = ({ mp3, dl, pholder }) => {
         setSearchVideos(null);
         document.activeElement.blur();
         const videoInfo = await getVideoInfo(value);
-        const video = videoInfo.video;
         const id = regexYTvid(value);
         const url = `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
 
