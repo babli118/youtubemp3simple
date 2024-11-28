@@ -39,7 +39,7 @@ export async function generateMetadata({ params }) {
 export default async function RootLayout({ children, params }) {
   return (
     <html>
-      <GoogleTagManager gtmId="GTM-NRP8VP5J" />
+      {/* <GoogleTagManager gtmId="GTM-NRP8VP5J" /> */}
       <meta name="monetag" content="8e3aa06f947045098c54fb451b33683c"></meta>
       <body
         className={
