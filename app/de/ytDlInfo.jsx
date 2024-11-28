@@ -6,7 +6,7 @@ const YtDlInfo = () => {
   // get the current date and time as a string
   const currentDateTime = now.toLocaleString();
   return (
-    <div className="text-text text-start mx-auto  items-center mb-6 justify-center md:w-[77vw] xl:w-[50vw] w-[90vw] ">
+    <div className="text-text text-start mx-auto  items-center justify-center ">
       <p className=" mt-4 text-sm sm:text-base text-text leading-7 sm:leading-7">
         YOUTUBEMP3 ist der schnellste YouTube-zu-MP3-Konverter und -Downloader,
         mit dem Sie YouTube ganz einfach kostenlos und in der besten verfügbaren
@@ -16,7 +16,6 @@ const YtDlInfo = () => {
         Hunderte Musikdateien schnell und völlig kostenlos direkt von YouTube
         konvertieren und herunterladen.
       </p>
-      <span className="text-sm">Last updated: {currentDateTime}</span>
     </div>
   );
 };

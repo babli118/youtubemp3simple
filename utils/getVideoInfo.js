@@ -24,7 +24,7 @@ const getVideoInfo = async (inputValue) => {
     const url = `https://api.mp3youtube.cc/v2/getVideoInfo`;
     const videoFetch = await fetch(url, options);
     const videoInfo = await videoFetch.json();
-    console.log(videoInfo);
+
     if (videoInfo.errorMsg) {
       toast.error(videoInfo.errorMsg, {
         position: "bottom-center",

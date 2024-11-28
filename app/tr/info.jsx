@@ -6,12 +6,14 @@ import { FaCopy } from "react-icons/fa";
 import { MdVideoLibrary } from "react-icons/md";
 import { FaDownload } from "react-icons/fa6";
 import BestDownloader from "./BestDownloader";
+import CurrentTime from "../../utils/CurrentTime";
 
 const Info = () => {
   return (
-    <div className="mt-8 flex flex-col gap-4 overflow-x-hidden items-center justify-center">
-      <div className="md:w-[70vw] xl:w-[50vw] w-[90vw]">
+    <div className=" mt-8 flex flex-col gap-4 overflow-x-hidden items-center justify-center  ">
+      <div className=" md:w-[70vw] mb-6 xl:w-[50vw] w-[90vw]">
         <YtDlInfo />
+        <CurrentTime />
       </div>
       <h2 className="text-3xl font-semibold text-center mb-4 text-text">
         YouTube&apos;u MP3&apos;e Dönüştürme Yöntemi
