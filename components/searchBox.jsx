@@ -2,8 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import getVideoInfo from "../utils/getVideoInfo";
-import { regexYTvid, isLink } from "../utils";
+import { isLink } from "../utils";
 import getSearch from "../utils/getSearch";
+import Ads from "../utils/Ads";
 import VideoCard from "../containers/VideoCard";
 import SkeletonContainer from "../containers/SkeletonContainer";
 import SearchResults from "./SearchResults";
@@ -12,16 +13,7 @@ import ScrollToTop from "react-scroll-to-top";
 import { toast } from "react-toastify";
 import { RxCross2 } from "react-icons/rx";
 import { sendGAEvent } from "@next/third-parties/google";
-
-const YOUTUBE_URLS = [
-  "https://www.youtube.com/",
-  "https://music.youtube.com/",
-  "youtube.com/",
-  "www.youtube.com/",
-  "https://youtu.be",
-  "youtu.be",
-  "www.youtu.be",
-];
+import { regexYTvid } from "../utils"; // Import the regexYTvid function
 
 const SearchBox = ({ mp3, dl, pholder }) => {
   const [inputValue, setInputValue] = useState("");
@@ -31,46 +23,63 @@ const SearchBox = ({ mp3, dl, pholder }) => {
   const [loading, setLoading] = useState(false);
   const [keywords, setKeywords] = useState("");
   const [showSkeletons, setShowSkeletons] = useState(false);
+  const [showAds, setShowAds] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState("");
-  const [videoUrl, setVideoUrl] = useState(""); // Added videoUrl state
+  const [videoUrl, setVideoUrl] = useState("");
   const songRef = useRef(null);
 
   useEffect(() => {
     console.log("-");
   }, [inputValue]);
 
-  const isYouTubeUrl = (url) =>
-    YOUTUBE_URLS.some((prefix) => url.startsWith(prefix));
-
   const handleInputChange = async (e) => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setInputValue(value);
-    setVideoUrl(value); // Ensure videoUrl is updated
+    setVideoUrl(value);
 
+    // Reset errors
     setError(null);
 
-    if (isYouTubeUrl(value)) {
-      try {
-        setLoading(true);
-        setVideoInfo(null);
-        setSearchVideos(null);
-        document.activeElement.blur();
-        const videoInfo = await getVideoInfo(value);
-        const id = regexYTvid(value);
-        const url = `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
+    // If the input is empty, don't proceed with validation
+    if (!value) {
+      return;
+    }
 
-        setThumbnailUrl(url);
-        setVideoInfo(videoInfo);
-        setVideoUrl(value); // Set the videoUrl state
-        setInputValue("");
-        scrollToSong();
-      } catch (error) {
-        console.error("Error downloading video information:", error);
-      } finally {
-        setLoading(false);
+    // Check if it's a valid link
+    if (isLink(value)) {
+      // Check if it's a valid YouTube URL
+      const videoId = regexYTvid(value);
+      if (videoId) {
+        setShowAds(true);
+        try {
+          setLoading(true);
+          setVideoInfo(null);
+          setSearchVideos(null);
+          document.activeElement.blur();
+
+          const videoInfo = await getVideoInfo(value);
+
+          const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
+
+          setThumbnailUrl(thumbnailUrl);
+          setVideoInfo(videoInfo);
+          setVideoUrl(value);
+          setInputValue("");
+          if (!videoInfo.errorMsg) {
+            scrollToSong();
+          }
+        } catch (error) {
+          toast.error("Something went wrong. Please try again.");
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        // Not a YouTube link
+        toast.error(
+          "Link not supported. Please enter a valid YouTube link and try again."
+        );
+        resetState();
       }
-    } else {
-      setLoading(false);
     }
   };
 
@@ -84,6 +93,8 @@ const SearchBox = ({ mp3, dl, pholder }) => {
 
   const handleSearchClick = async (e) => {
     e.preventDefault();
+    try {
+    } catch (error) {}
 
     if (!inputValue) {
       setError("Input cannot be empty.");
@@ -91,12 +102,10 @@ const SearchBox = ({ mp3, dl, pholder }) => {
       return;
     }
 
-    if (isYouTubeUrl(inputValue)) {
+    const videoId = regexYTvid(inputValue);
+    if (videoId) {
       handleInputChange({ target: { value: inputValue } });
-    } else if (
-      inputValue.startsWith("https://") ||
-      inputValue.startsWith("www.")
-    ) {
+    } else if (isLink(inputValue)) {
       toast.error(
         "Invalid YouTube Link. Please enter a valid YouTube link and try again."
       );
@@ -131,15 +140,17 @@ const SearchBox = ({ mp3, dl, pholder }) => {
       setSearchVideos("");
       document.activeElement.blur();
       const videoInfo = await getVideoInfo(url);
-      const id = regexYTvid(url);
-      const thumbUrl = `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
+      const videoId = regexYTvid(url);
+      const thumbUrl = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
       setThumbnailUrl(thumbUrl);
 
       setVideoInfo(videoInfo);
       setVideoUrl(url);
       setLoading(false);
       setInputValue("");
-      scrollToSong();
+      if (!videoInfo.errorMsg) {
+        scrollToSong();
+      }
     } catch (error) {
       window.scrollTo({
         top: 0,
@@ -170,6 +181,7 @@ const SearchBox = ({ mp3, dl, pholder }) => {
 
   return (
     <div className="  md:w-[70vw] xl:w-[50vw] w-[85vw]">
+      <Ads showAds={showAds} />
       <div className="transition-all">
         <ScrollToTop
           smooth

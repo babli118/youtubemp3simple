@@ -25,23 +25,8 @@ const getVideoInfo = async (inputValue) => {
     const videoFetch = await fetch(url, options);
     const videoInfo = await videoFetch.json();
     console.log(videoInfo);
-
-    if (videoInfo.videoTime < 0) {
-      toast.error("Live videos can't be downloaded", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-      return;
-    }
-    if (videoInfo.duration > 10800) {
-      toast.error("Youtube Videos Above 3 Hours Length Cant Be Downloaded", {
+    if (videoInfo.errorMsg) {
+      toast.error(videoInfo.errorMsg, {
         position: "bottom-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -56,20 +41,17 @@ const getVideoInfo = async (inputValue) => {
     }
     return videoInfo;
   } catch (error) {
-    toast.error(
-      "Unable to find your video, Please enter a valid Youtube link and try again.",
-      {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      }
-    );
+    toast.error(error.errorMsg, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
   }
 };
 
