@@ -111,6 +111,7 @@ const SearchBox = ({ mp3, dl, pholder }) => {
       );
       setLoading(false);
     } else {
+      setShowAds(true);
       setVideoInfo(null);
       setSearchVideos(null);
       document.activeElement.blur();
