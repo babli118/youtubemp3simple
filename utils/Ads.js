@@ -10,7 +10,7 @@ const Ads = ({ showAds }) => {
           attributes: { "data-zone": "8566015" },
         },
         {
-          src: "gh.oweltyagruif.com/fSuTBgzUgzz1c/112267",
+          src: "//gh.oweltyagruif.com/fSuTBgzUgzz1c/112267",
           attributes: { "data-cfasync": "false", async: "true" },
         },
       ];
