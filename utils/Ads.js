@@ -9,10 +9,6 @@ const Ads = ({ showAds }) => {
           src: "https://hoomigri.com/tag.min.js",
           attributes: { "data-zone": "8566015" },
         },
-        {
-          src: "//gh.oweltyagruif.com/fSuTBgzUgzz1c/112267",
-          attributes: { "data-cfasync": "false", async: "true" },
-        },
       ];
 
       // Append all scripts to the document
