@@ -11,7 +11,7 @@ import { TailSpin } from "react-loader-spinner";
 import { genToken } from "../app/token.js";
 import { startDownload, getKey } from "../utils.jsx";
 
-const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
+const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl, token }) => {
   const video = videoInfo;
 
   const videoId = video.videoId;
@@ -29,16 +29,7 @@ const VideoCard = ({ videoInfo, url, mp3, thumbnailUrl }) => {
       return title;
     }
   }
-  const [token, setToken] = useState("");
-  useEffect(() => {
-    const getToken = async () => {
-      const result = await genToken();
-      setToken(getKey(result));
-    };
 
-    getToken();
-  }, []);
-  // console.log(token);
   const getDownloadLink = async (videoId, format) => {
     try {
       const res = await fetch(`https://api.mp3youtube.cc/v2/converter`, {

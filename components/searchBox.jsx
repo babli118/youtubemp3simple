@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import getVideoInfo from "../utils/getVideoInfo";
-import { isLink } from "../utils";
+import { getKey, isLink } from "../utils";
 import getSearch from "../utils/getSearch";
 import Ads from "../utils/Ads";
 import VideoCard from "../containers/VideoCard";
@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { RxCross2 } from "react-icons/rx";
 import { sendGAEvent } from "@next/third-parties/google";
 import { regexYTvid } from "../utils"; // Import the regexYTvid function
+import { genToken } from "../app/token";
 
 const SearchBox = ({ mp3, dl, pholder }) => {
   const [inputValue, setInputValue] = useState("");
@@ -27,10 +28,21 @@ const SearchBox = ({ mp3, dl, pholder }) => {
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const songRef = useRef(null);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     console.log("-");
   }, [inputValue]);
+
+  useEffect(() => {
+    const getToken = async () => {
+      const result = await genToken();
+      setToken(getKey(result));
+    };
+
+    getToken(); // Run once when component mounts
+    console.log(token);
+  }, []);
 
   const handleInputChange = async (e) => {
     const value = e.target.value.trim();
@@ -57,7 +69,7 @@ const SearchBox = ({ mp3, dl, pholder }) => {
           setSearchVideos(null);
           document.activeElement.blur();
 
-          const videoInfo = await getVideoInfo(value);
+          const videoInfo = await getVideoInfo(value, token);
 
           const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
 
@@ -289,6 +301,7 @@ const SearchBox = ({ mp3, dl, pholder }) => {
                 url={videoUrl}
                 mp3={mp3}
                 thumbnailUrl={thumbnailUrl}
+                token={token}
               />
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { Bounce, toast } from "react-toastify";
 
-const getVideoInfo = async (inputValue) => {
+const getVideoInfo = async (inputValue, token) => {
   try {
     // const options = {
     //   method: "POST",
@@ -17,6 +17,8 @@ const getVideoInfo = async (inputValue) => {
         "content-type": "application/x-www-form-urlencoded",
         "user-agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0",
+        accept: "*/*",
+        key: token,
       },
       body: `link=${inputValue}`,
     };
