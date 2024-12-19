@@ -41,7 +41,6 @@ const SearchBox = ({ mp3, dl, pholder }) => {
     };
 
     getToken(); // Run once when component mounts
-    console.log(token);
   }, []);
 
   const handleInputChange = async (e) => {
