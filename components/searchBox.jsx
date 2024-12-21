@@ -34,14 +34,10 @@ const SearchBox = ({ mp3, dl, pholder }) => {
     console.log("-");
   }, [inputValue]);
 
-  useEffect(() => {
-    const getToken = async () => {
-      const result = await genToken();
-      setToken(getKey(result));
-    };
-
-    getToken(); // Run once when component mounts
-  }, []);
+  const getToken = async () => {
+    const result = await genToken();
+    setToken(getKey(result));
+  };
 
   const handleInputChange = async (e) => {
     const value = e.target.value.trim();
@@ -67,6 +63,7 @@ const SearchBox = ({ mp3, dl, pholder }) => {
           setVideoInfo(null);
           setSearchVideos(null);
           document.activeElement.blur();
+          getToken();
 
           const videoInfo = await getVideoInfo(value, token);
 
@@ -151,7 +148,8 @@ const SearchBox = ({ mp3, dl, pholder }) => {
       setLoading(true);
       setSearchVideos("");
       document.activeElement.blur();
-      const videoInfo = await getVideoInfo(url);
+      getToken();
+      const videoInfo = await getVideoInfo(url, token);
       const videoId = regexYTvid(url);
       const thumbUrl = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
       setThumbnailUrl(thumbUrl);
